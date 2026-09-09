@@ -7,85 +7,80 @@ public class Media
         Scanner resp = new Scanner(System.in);
 
         String nome;
-        float nota1, nota2, nota3, media;
+        float nota[] = new float[4], media;
         char continuar;
 
         do {
 
 
-            System.out.println("Qual o seu nome?");
+            System.out.print("Qual o seu nome: ");
             nome = resp.next();
 
-            do {
+            for(int i = 0; i <= 3; i++)
+            {
+                do {
 
-                System.out.print("Primeira nota foi: ");
+                    System.out.print("Nota " + (i + 1) + ": ");
+                    if(resp.hasNextFloat())
+                    {
+                        nota[i] = resp.nextFloat();
+                    }
+                    else
+                    {
+                        System.out.println("Digite uma NOTA VALIDA!");
+                        resp.next();
+                        nota[i] = -1;
+                    }
 
-                if(resp.hasNextFloat())
 
-                   nota1 = resp.nextFloat();
+                }while(nota[i] > 10 || nota[i] < 0);
+            }
 
+            float soma = 0;
 
-                else
+            for(int i = 0; i <= 3; i++)
+            {
+                soma = nota[i] + soma;
+            }
+
+            media = (float) soma / 4;
+
+            System.out.println("======================");
+
+            System.out.println("Aluno: " + nome);
+
+            System.out.printf("Notas: ");
+
+            for(int i = 0; i <= 3; i++)
+            {
+                if (i == 3)
                 {
-                    System.out.println("Digite sua NOTA!");
-                    resp.next();
-                    nota1 = -1;
+                    System.out.printf(nota[i] + "");
                 }
-
-            } while (nota1 < 0 || nota1 > 10);
-
-
-            do {
-
-                System.out.print("Segunda nota foi: ");
-                if(resp.hasNextFloat())
-
-                   nota2 = resp.nextFloat();
-
                 else
-                {
-                    System.out.println("Digite sua NOTA!");
-                    resp.next();
-                    nota2 = -1;
-                }
+                   System.out.printf(nota[i] + ", ");
+            }
 
-            } while (nota2 < 0 || nota2 > 10);
-
-
-
-            do {
-
-                System.out.print("Terceira nota foi: ");
-                if(resp.hasNextFloat())
-
-                   nota3 = resp.nextFloat();
-
-                else
-                {
-                    System.out.println("Digite sua NOTA!");
-                    resp.next();
-                    nota3 = -1;
-                }
-
-            } while (nota3 < 0 || nota3 > 10);
-
-            media = (nota1 + nota2 + nota3) / 3;
+            System.out.println();
 
             if (media >= 7) {
 
-                System.out.printf(nome + ", sua nota foi %.1f", media);
+                System.out.printf("Media: %.1f", media);
                 System.out.println();
-                System.out.print("Situação: APROVADO");
+                System.out.println("Situação: APROVADO");
 
             } else if (media >= 5) {
-                System.out.printf(nome + ", sua nota foi %.1f", media);
+                System.out.printf("Media: %.1f", media);
                 System.out.println();
-                System.out.print("Situação: RECUPERÇÃO");
+                System.out.println("Situação: RECUPERÇÃO");
             } else {
-                System.out.printf(nome + ", sua nota foi %.1f", media);
+                System.out.printf("Media: %.1f", media);
                 System.out.println();
-                System.out.print("Situação: REPROVADO");
+                System.out.println("Situação: REPROVADO");
             }
+
+
+            System.out.println("======================");
 
             System.out.println();
 
